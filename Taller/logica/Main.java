@@ -23,6 +23,7 @@ public class Main {
 
 		/// Lectura de Usuarios y contraseñas
 		try {
+			//ARREGLAR ENTRADA DEL ARCHIVO CREAR CARPETA DENTRO DEL PROYECTO EN JAVA....
 			archU = new FileReader("C:\\Users\\eugen\\Desktop\\Ecplise Projects\\Usuarios.txt");
 
 			if (archU.ready()) {
@@ -30,6 +31,7 @@ public class Main {
 				String cadena;
 				int i = 0;
 				while ((cadena = lector.readLine()) != null) {
+					
 					String[] partes = cadena.split(";");
 
 					String claves = partes[1];
@@ -98,6 +100,7 @@ public class Main {
 		do {
 
 			System.out.println("1) Menu de Usuarios\n2) Menu de Analisis\n3) Salir");
+			System.out.print("\n<");
 			try {
 
 				valor = Integer.parseInt(entrada.nextLine());
@@ -130,8 +133,16 @@ public class Main {
 	public static void subMenuUsuario(Scanner entrada) {
 		int opcion = 0;
 		do {
-			System.out.println("Que deseas realizar?");
-			
+			try {
+				System.out.println("\nQue deseas realizar?");
+				System.out.print("\n1) Registrar Actividad\n2) Modificar Actividad\n3) Eliminar Actividad\n4) Cambiar Contraseña\n5) Salir");
+				System.out.print("\n<");
+				opcion = entrada.nextInt();
+				
+				
+			}catch(Exception e) {
+				System.out.println("ERROR....Ingrese nuevamente...");
+			}
 			
 		}while(opcion < 1 || opcion > 5);
 		
