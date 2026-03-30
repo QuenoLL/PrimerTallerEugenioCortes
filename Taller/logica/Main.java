@@ -63,7 +63,8 @@ public class Main {
 		}while(opcion < 1 || opcion > 3);
 		
 	}// END OF THE MAIN.
-	
+
+	//Funcion de ingreso y autenticacion del usuario, listas en static para poder acceder a las listas paralelas...
 	public static void IngresoUsuario(Scanner entrada) {
 		boolean indicador = false;
 		int opcion;
@@ -97,6 +98,7 @@ public class Main {
 		
 	}
 	
+	//Submenu del usuario, tipo de actividad a realizar en su registro...
 	public static void submenuUsuario(Scanner entrada, String usuario) {
 		int opcion = 0;
 		
@@ -108,7 +110,7 @@ public class Main {
 				opcion = Integer.parseInt(entrada.nextLine());
 				
 				switch(opcion) {
-				case 1: registrarArchivo(entrada,usuario);
+				case 1: registrarArchivo(entrada,usuario);//Llamado a la funcion para registrar actividad...
 				}
 				
 			}catch(Exception e) {
@@ -117,7 +119,9 @@ public class Main {
 		}while(opcion < 1 || opcion > 5);
 	}
 	
+	//Funcion para registrar actividad...
 	public static void registrarArchivo(Scanner entrada, String usuario) {
+		
 		String[] partes = new String[3];
 		boolean indice = false;
 		int dia, mes, año, horas;
@@ -127,6 +131,7 @@ public class Main {
 			try {
 				System.out.println("Ingrese su fecha:");
 				
+				//Control de errores por separado para ingreso correcto de datos...
 				do {
 					System.out.println("\nIngrese el numero del dia:");
 					System.out.print("<");
@@ -153,9 +158,11 @@ public class Main {
 				}while(horas < 1 || horas > 24);
 				
 				
+				
 			}catch(Exception e) {
 				System.out.println("ERROR. Valor ingresado erroneo...");
 			}
 		}while(!indice);
 	}
+	
 }
