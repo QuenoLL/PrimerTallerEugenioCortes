@@ -80,6 +80,7 @@ public class Main {
 				}
 			}while(opcion < 1 || opcion > 3 && !indicador);
 		}
+		lector.close();
 		
 	}//END OF THE MAIN..................................................
 	
