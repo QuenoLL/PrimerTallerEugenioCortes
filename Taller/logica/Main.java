@@ -160,6 +160,10 @@ public class Main {
 					System.out.print("<");
 				    dia = Integer.parseInt(entrada.nextLine());
 				}while(dia < 0 || dia > 31);
+				String diaReal = String.valueOf(dia);
+				if(diaReal.length() == 1) {
+					diaReal = "0"+dia;
+				}
 				
 				do {
 					System.out.println("Ingrese el mes:");
@@ -178,7 +182,7 @@ public class Main {
 					año = Integer.parseInt(entrada.nextLine());
 				}while(año > 2026 || año < 2010);
 				
-				String fecha = dia+"/"+mesReal+"/"+año;
+				String fecha = diaReal+"/"+mesReal+"/"+año;
 				
 				do {
 					System.out.println("Ingrese las horas de su actividad:");
@@ -242,8 +246,8 @@ public class Main {
 			if(partes[0].equals(usuario)) {
 				System.out.printf("%d) "+mx[i],contador);
 				System.out.println();
-				contador++;
 				indices[contador] = i;
+				contador++;
 			}			
 		}
 		
@@ -319,8 +323,11 @@ public class Main {
 			    	   System.out.println("Ingrese el dia:");
 			    	   System.out.print("<");
 			    	   dia = Integer.parseInt(entrada.nextLine());
-			    	   
 			       }while(dia < 0 || dia > 31);
+			       String diaReal = String.valueOf(dia);
+			       if(diaReal.length() == 1) {
+			    	   diaReal = "0"+dia;
+			       }
 			       
 			       do {
 			    	   System.out.println("Ingrese el mes:");
@@ -339,7 +346,7 @@ public class Main {
 						año = Integer.parseInt(entrada.nextLine());
 					}while(año > 2026 || año < 2010);
 					
-					String fecha = dia+"/"+mesReal+"/"+año;
+					String fecha = diaReal+"/"+mesReal+"/"+año;
 					
 					//Lo que hago es unir con join las partes del arreglo ya modificadas(Me las une como string)...
 					partes[1] = fecha;
@@ -408,7 +415,6 @@ public class Main {
 	//Metodo Eliminar actividad.
 	public static void eliminarActividad(Scanner entrada, String usuario) throws IOException{
 		agregarItemsLista();
-		//Al igual que en los demas 
 		int opcion = 0;
 		int contador = 1;
 		int[] indices = new int[mx.length];
@@ -441,7 +447,7 @@ public class Main {
 		if(opcion == 0) {
 			submenuUsuario(entrada, usuario);
 		}
-		
+		//La linea a elimar sera null, de modo que sobrescribo el archivo saltandome los null
 		mx[indices[opcion]] = null;
 		
 		String ruta = "txt/Registros.txt";
@@ -475,9 +481,11 @@ public class Main {
 		
 	}
 	
+	//Metodo cambiar contraseñas.
 	public static void cambiarContraseña(Scanner entrada, String usuario) throws IOException{
 		System.out.println("---Cambio de contraseña---");
 		
+		//Cambio la contraseña de la lista del principio donde estab contenida.
 		for(int i = 0; i < usuarios.length; i++) {
 			if(usuario.equals(usuarios[i])) {
 				System.out.printf("\nSu contraseña actual es %s",contraseñas[i]);
@@ -498,6 +506,7 @@ public class Main {
 		
 	}
 	
+	//Guardado de la contrseña en txt
 	public static void guardarContraseña() throws IOException{
 		String ruta = "txt/Usuarios.txt";
 		
@@ -518,6 +527,7 @@ public class Main {
 		}
 	}
 	
+	//Menu Analisis con switch.
 	public static void menuAnalisis(Scanner entrada) {
 		int opcion = 0;
 		
@@ -549,13 +559,15 @@ public class Main {
 		}
 	}
 	
+	//Actividad mas realizada por archivo txt
 	public static void actividadMasRealizada(Scanner entrada) {
 		try {
-			llenadoArregloActividad();
+			llenadoArregloActividad();//Llamo al metodo que me llena las listas de actividades.
 		}catch(Exception e) {
 			System.out.println("ERROR....");
 		}
 		
+		//Imprimo con respecto a un ciclo que con un mayor me da la actividad mas hecha.
 		int mayor = Integer.MIN_VALUE;
 		String mayorNom = null;
 		for(int i = 0; i < actividades.length; i++) {
@@ -573,9 +585,11 @@ public class Main {
 		
 	}
 	
+	//Llenado arreglo actividad
 	public static void llenadoArregloActividad() throws FileNotFoundException{
 		File file = new File("txt/Registros.txt");
 		Scanner lector = new Scanner(file);
+		//Ocupo listas en static para llamarlas, las cuales tienen espacio para 300 actividades distintas.
 		
 		while(lector.hasNextLine()) {
 			String linea = lector.nextLine();
@@ -585,13 +599,14 @@ public class Main {
 			boolean encontrada = false;
 			
 			for(int i = 0; i < totalActividades; i++) {
-				if(actividades[i] != null && actividades[i].equalsIgnoreCase(actividad)) {
+				if(actividades[i] != null && actividades[i].equalsIgnoreCase(actividad)) {//veo que no es una posicion null y que la actividad concuerde si es que existe.
 					conteo[i]++;
 					encontrada = true;
 					break;
 				}
 			}
 			
+			//Si no existe la actividad en la lista se agrega.
 			if(!encontrada) {
 				actividades[totalActividades] = actividad;
 				conteo[totalActividades] = 1;
@@ -602,15 +617,16 @@ public class Main {
 		
 	}
 	
+	//Actividades mas realizadas por usuario.
 	public static void actividadPorUsuario(Scanner entrada) {
 		System.out.println("\nActividades mas realizadas por cada usuario:\n");
 		try {
-			llenadoActividadUsuario();
+			llenadoActividadUsuario();//Lleno la lista con su respectivo try.
 		}catch(Exception e) {
 			System.out.println("ERROR. Llenado de lista fallido..."+e.getMessage());
 		}
 		
-		for(int i = 0; i < usuarios.length; i++) {
+		for(int i = 0; i < usuarios.length; i++) {//Imprimo en funcion de los 3 usuarios existentes.
 			int max = Integer.MIN_VALUE;
 			String actividadMax = null;
 			
@@ -626,6 +642,7 @@ public class Main {
 		menuAnalisis(entrada);
 	}
 	
+	//Llenado actividad usuario individuales.
 	public static void llenadoActividadUsuario() throws FileNotFoundException{
 		File file = new File("txt/Registros.txt");
 		Scanner lector = new Scanner(file);
@@ -640,16 +657,17 @@ public class Main {
 			
 			boolean encontrado = false;
 			
+			//total individual me da la oportunidad de contar cuantas actividades hay en la lista.
 			for(int i = 0; i < totalIndividual; i++) {
 				if(usuariosIndividualesActividad[i] != null && actividadesIndividuales[i] != null) {
 					if(user.equals(usuariosIndividualesActividad[i]) && actividad.equalsIgnoreCase(actividadesIndividuales[i])) {
-						conteoIndividual[i] += horas;
+						conteoIndividual[i] += horas;//Sumo las horas pertinentes a la actividad.
 						encontrado = true;
 						break;
 					}
 				}
 			}
-			
+			//Si es que la actividad no esta se agrega, en funcion del numero de actividades totales que es mi indice.
 			if(!encontrado) {
 				usuariosIndividualesActividad[totalIndividual] = user;
 				actividadesIndividuales[totalIndividual] = actividad;
@@ -663,11 +681,13 @@ public class Main {
 		
 	}
 	
+	//Usuario con mas horas registradas
 	public static void usuarioMayorProcastinacion(Scanner entrada) {
 		try {
 			File file = new File("txt/Registros.txt");
 			Scanner lector = new Scanner(file);
 			
+			//Creo lista que me guarda las horas de procastinacion de cada usuario, de modo que es acorde al largo de la lista de usuarios
 			int[] horasProcastinacion = new int[usuarios.length];
 			
 			while(lector.hasNextLine()) {
@@ -680,7 +700,7 @@ public class Main {
 				
 				for(int i = 0; i < usuarios.length; i++) {
 					if(usuarios[i].equalsIgnoreCase(user)) {
-						horasProcastinacion[i] += horas;
+						horasProcastinacion[i] += horas;//Sumo las horas en la posicion adecuada de cada persona
 					}
 				}
 			}
@@ -689,6 +709,7 @@ public class Main {
 			int mayor = Integer.MIN_VALUE;
 			String mayorNombre = null;
 			
+			//Imprimo el mayor.
 			for(int i = 0; i < usuarios.length; i++) {
 				if(horasProcastinacion[i] > mayor) {
 					mayor = horasProcastinacion[i];
@@ -706,7 +727,9 @@ public class Main {
 		
 	}
 	
+	//Actividades registradas.
 	public static void imprimirActividades(Scanner entrada) {
+		//Printeo normal de cada una de las lineas del archivo txt.
 		try {
 			File file = new File("txt/Registros.txt");
 			Scanner lector = new Scanner(file);
