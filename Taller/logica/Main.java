@@ -22,6 +22,9 @@ public class Main {
 	static int totalActividades = 0;
 	
 	public static void main(String[] args) throws IOException{
+		//Nombre: Eugenio Román Cortés Egaña 
+		//Rut: 22.405.687-7
+		//Carrera: Ingenieria Civil en Computacion Informatica.
 		
 		//Variables y Lectura de Usuario....
 		
