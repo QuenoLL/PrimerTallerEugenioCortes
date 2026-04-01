@@ -646,7 +646,7 @@ public class Main {
 		menuAnalisis(entrada);
 	}
 	
-	//Llenado actividad usuario individuales.
+	//Llenado actividad usuario individuales...
 	public static void llenadoActividadUsuario() throws FileNotFoundException{
 		File file = new File("txt/Registros.txt");
 		Scanner lector = new Scanner(file);
