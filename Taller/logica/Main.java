@@ -140,7 +140,7 @@ public class Main {
 				        break;
 				case 4: cambiarContraseña(entrada,usuario);
 				        break;
-				case 5: return;
+				case 5: break;
 				}
 				
 			}catch(Exception e) {
@@ -153,6 +153,7 @@ public class Main {
 	public static void registrarArchivo(Scanner entrada, String usuario) {
 		boolean indice = false;
 		int dia, mes, año, horas;
+		String actividad;
 		
 		//CONTROL DE ERRORES DE LAS FECHAS, EL MINIMO DEL AÑO ES 2010 SOLO PARA TENER UN RANGO....
 		do {
@@ -173,7 +174,7 @@ public class Main {
 					System.out.println("Ingrese el mes:");
 					System.out.print("<");
 					mes = Integer.parseInt(entrada.nextLine());
-				}while(mes < 0 || mes > 12);
+				}while(mes < 1 || mes > 12);
 				
 				String mesReal = String.valueOf(mes);
 				if(mesReal.length() == 1) {
@@ -190,12 +191,15 @@ public class Main {
 				
 				do {
 					System.out.println("Ingrese las horas de su actividad:");
+					System.out.print("<");
 					horas = Integer.parseInt(entrada.nextLine());
 				}while(horas < 1 || horas > 24);
 				
-				System.out.printf("Ingrese la actividad que realizo el %s :\n",fecha);
-				System.out.print("<");
-				String actividad = entrada.nextLine();
+				do {
+					System.out.printf("Ingrese la actividad que realizo el %s :\n",fecha);
+					System.out.print("<");
+					actividad = entrada.nextLine();
+				}while(actividad.equals(""));
 				
 				String linea = usuario+";"+fecha+";"+horas+";"+actividad;
 				System.out.println("\nActividad a agregar: "+linea);
@@ -600,11 +604,13 @@ public class Main {
 			String[] partes = linea.split(";");
 			
 			String actividad = partes[3];
+			int horas = Integer.parseInt(partes[2]);
+			
 			boolean encontrada = false;
 			
 			for(int i = 0; i < totalActividades; i++) {
 				if(actividades[i] != null && actividades[i].equalsIgnoreCase(actividad)) {//veo que no es una posicion null y que la actividad concuerde si es que existe.
-					conteo[i]++;
+					conteo[i] += horas;
 					encontrada = true;
 					break;
 				}
@@ -613,7 +619,7 @@ public class Main {
 			//Si no existe la actividad en la lista se agrega.
 			if(!encontrada) {
 				actividades[totalActividades] = actividad;
-				conteo[totalActividades] = 1;
+				conteo[totalActividades] = horas;
 				totalActividades++;
 			}
 		}
