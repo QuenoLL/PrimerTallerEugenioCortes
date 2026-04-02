@@ -12,5 +12,5 @@ el nombre de usuario con su respectiva contraseña (esto dado segun el archivo.t
 Este nos habilita distintas funcionalidades, registrar una actividad, modificar o eliminar una ya existente, cambiar contraseña y un respectivo salir para volver al menu
 principal(cabe recalcar que existe un regresar en algunas pestañas de los menus para devolvernos un paso); En el menu de analisis se nos presenta distintas opciones 
 igualmente, vizualizar la actividad mas realizada, la actividad mas realizada por usuario, el usuario con mayor procastinacion(suma de horas), ver todas las actividades
-y un salir para volver. Es necesario recalcar que el programa esta habilitado para maximo 300 actividades(lineas en el archivo.txt "Regitros.txt"), por lo cual si es que
+y un salir para volver. Es necesario recalcar que el programa esta habilitado para maximo 300 actividades(lineas en el archivo.txt "Registros.txt"), por lo cual si es que
 hay mas que esta cantidad lo atajara el catch respectivo al llenado de las actividades, etc.
