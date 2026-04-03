@@ -1,6 +1,6 @@
 Nombre: Eugenio Cortés Egaña; Carrera: Ingenieria Civil en Computacion e Informatica
 
-El proyecto de este repositorio, PrimerTallerEugenioCortes trata de la ejecucion de 2 menus interactivos, el primero siendo de usuario, con su respectivo ingreso del mismo
+El proyecto de este repositorio, PrimerTallerEugenioCortes, trata de la ejecucion de 2 menus interactivos, el primero siendo de usuario, con un respectivo ingreso al mismo
 ademas de distintas funcionalidades, estas a partir de un archivo.txt llamado "Registros.txt" en donde se encuentran distintas actividades, con tal formato que es posible su 
 lectura; El segundo menu, es el denominado de analiss, el cual me entrega datos en base al archivo anteriormente nombrado; Es importante aclarar que el proyecto funciona
 en base a dos archivos en una misma carpeta en el proyecto.
